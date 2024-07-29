@@ -1,1 +1,2 @@
 Download_link=https://github.com/username/repo/releases/download/latest/your-app.apk
+update=true
