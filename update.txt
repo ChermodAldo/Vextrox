@@ -1,1 +1,1 @@
-Download_link=
+Download_link=https://github.com/ChermodAldo/Vextrox/blob/main/update.txt
