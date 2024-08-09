@@ -1,2 +1,2 @@
-Link_Url=https://t.me/ChermodzsModule/2573
+Link_Url=https://api.whatsapp.com/send?phone=+6281268789232
 Version=1.0
