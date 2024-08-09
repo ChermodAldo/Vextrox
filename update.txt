@@ -1,2 +1,2 @@
 Link_Url=https://t.me/ChermodzsModule/2573
-Version=3.1
+Version=1.0
