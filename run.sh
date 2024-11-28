@@ -10,7 +10,6 @@ shellVex="$4"
 Vextrox="$5"
 a="$6"
 s="$7"
-v="$8"
 x() {
 echo ""
 exit 0
