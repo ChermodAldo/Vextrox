@@ -46,8 +46,18 @@ cmd activity force-stop "$All_package" > /dev/null 2>&1
 cmd activity kill "$All_package" > /dev/null 2>&1
 am kill "$All_package" > /dev/null 2>&1
 am kill-all "$All_package" > /dev/null 2>&1
+clear > /dev/null 2>&1 &
 fi
 done
+}
+clear() {
+cmd stats clear-puller-cache
+logcat -c
+find /sdcard/Android/data/*/cache/* -delete
+am clear-watch-heap -a
+simpleperf --log fatal --log-to-android-buffer 0
+sm fstrim
+cmd activity clear-debug-app
 }
 Notification() {
 cmd notification post -S messaging --conversation "Vextrox" --message "[ $package_name ]: Is Running - Vextrox Shell" "VextroxShell" "Active successful" > /dev/null 2>&1 &
@@ -74,7 +84,7 @@ if [ -z "$package_name" ]; then
 echo "$C Package name not entered" && x 
 fi
 if [ -f "$prop" ]; then 
-echo -e "$S Vextrox is detected" && sleep 1 
+echo -e "$S Vextrox is detected" && sleep 1
 echo -e "$C Vextrox [ $Vr ] detected" && sleep 3 
 echo -e "$P Optimizing Vextrox" && close 
 echo -e "$S Vextrox is Now Active" && sleep 2 && Vxt 
