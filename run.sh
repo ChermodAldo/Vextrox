@@ -1,15 +1,17 @@
-C="[ ? ]" # Checking
-P="[ - ]" # Processing
-S="[ > ]" # Started
-F="[ + ]" # Success
-E="[ ! ]" # Error
-package_name="$1"
-prop="$2"
-v="$3"
-shellVex="$4"
-Vextrox="$5"
-a="$6"
-s="$7"
+local C="[ ? ]" # Checking
+local P="[ - ]" # Processing
+local S="[ > ]" # Started
+local F="[ + ]" # Success
+local E="[ ! ]" # Error
+local package_name="$1"
+local prop="$2"
+local v="$3"
+local shellVex="$4"
+local Vextrox="$5"
+local a="$6"
+local s="$7"
+local Vr=$(dumpsys package "$v" | grep versionName | awk -F= '{print $2}')
+local cache_path="/storage/emulated/0/Android/data/${All_package}/cache"
 x() {
 echo ""
 exit 0
@@ -17,7 +19,6 @@ exit 0
 if ! command -v dumpsys > /dev/null; then
 echo "$E Command dumpsys not found" && x
 fi
-Vr=$(dumpsys package "$v" | grep versionName | awk -F= '{print $2}')
 # Inspiration @FahrezOne
 close() {
 ignore_list=()
@@ -37,7 +38,6 @@ done
 if [[ "$should_ignore" -eq 1 || "$All_package" == "$b" || "$All_package" == "$t" || "$All_package" == "$s" || "$All_package" == "$v" || "$All_package" == "$a" || "$All_package" == "$package_name" ]]; then
 continue
 else
-cache_path="/storage/emulated/0/Android/data/${All_package}/cache"
 if [ -d "$cache_path" ]; then
 rm -rf "$cache_path" > /dev/null 2>&1
 fi
@@ -71,14 +71,14 @@ fi
 updated_package_name=$(grep '^package_name=' "$prop" | awk -F '=' '{print $2}')
 }
 if [ -z "$package_name" ]; then 
-echo "$C Package name not entered." && x 
+echo "$C Package name not entered" && x 
 fi
 if [ -f "$prop" ]; then 
-echo -e "$S Vextrox is detected." && sleep 1 
-echo -e "$C Vextrox [ $Vr ] detected." && sleep 3 
-echo -e "$P Optimizing Vextrox." && sleep 1 && close 
-echo -e "$S Vextrox is Now Active." && sleep 2 && Vxt 
-echo -e "$F Opening Vextrox - [ Connect Now ]." && sleep 1 
+echo -e "$S Vextrox is detected" && sleep 1 
+echo -e "$C Vextrox [ $Vr ] detected" && sleep 3 
+echo -e "$P Optimizing Vextrox" && close 
+echo -e "$S Vextrox is Now Active" && sleep 2 && Vxt 
+echo -e "$F Opening Vextrox - [ Connect Now ]" && sleep 1 
 am start -n "${v}/${Vextrox}" --es "VEXTROX" "${shellVex}" > /dev/null 2>&1 
 Opening 
 else 
