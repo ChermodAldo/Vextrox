@@ -11,7 +11,7 @@ local Vextrox="$5"
 local a="$6"
 local s="$7"
 local Vr=$(dumpsys package "$v" | grep versionName | awk -F= '{print $2}')
-jlocal packages_list="/storage/emulated/0/VextroxExecution/VxList/packages.list"
+local packages_list="/storage/emulated/0/VextroxExecution/VxList/packages.list"
 local name_package=$(cat "$packages_list")
 x() {
 echo ""
