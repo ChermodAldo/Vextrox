@@ -1,3 +1,5 @@
+#!/bin/bash
+
 local C="[ ? ]" # Checking
 local P="[ - ]" # Processing
 local S="[ > ]" # Started
@@ -80,7 +82,6 @@ fi
 updated_package_name=$(grep '^package_name=' "$prop" | awk -F '=' '{print $2}')
 }
 if [ -n "$package_name" ]; then
-if echo $name_package | grep -qw "$package_name"; then
 if [ -f "$prop" ]; then 
 echo -e "$S Vextrox is detected" && sleep 1
 echo -e "$C Vextrox [ $Vr ] detected" && sleep 3 
@@ -91,9 +92,6 @@ am start -n "${v}/${Vextrox}" --es "VEXTROX" "${shellVex}" > /dev/null 2>&1
 Opening 
 else 
 echo "$E ActivityManager & PackageManager not Permitted."
-fi
-else
-echo "$E Package not detected or installed" && x
 fi
 else
 echo "$C Package name not entered" && x 
