@@ -1,5 +1,4 @@
 #!/bin/bash
-
 local C="[ ? ]" # Checking
 local P="[ - ]" # Processing
 local S="[ > ]" # Started
@@ -10,7 +9,7 @@ local prop="$2"
 local v="$3"
 local shellVex="$4"
 local Vextrox="$5"
-local a="$6"
+a=$(grep '^No_StopApp=' "$prop" | awk -F '=' '{print $2}')
 local s="$7"
 local Vr=$(dumpsys package "$v" | grep versionName | awk -F= '{print $2}')
 local packages_list="/sdcard/VextroxExecution/.VxList/packages.list"
@@ -47,18 +46,8 @@ cmd activity force-stop "$All_package" > /dev/null 2>&1
 cmd activity kill "$All_package" > /dev/null 2>&1
 am kill "$All_package" > /dev/null 2>&1
 am kill-all "$All_package" > /dev/null 2>&1
-clear > /dev/null 2>&1 &
 fi
 done
-}
-clear() {
-cmd stats clear-puller-cache
-logcat -c
-find /sdcard/Android/data/*/cache/* -delete
-am clear-watch-heap -a
-simpleperf --log fatal --log-to-android-buffer 0
-sm fstrim
-cmd activity clear-debug-app
 }
 Notification() {
 cmd notification post -S messaging --conversation "Vextrox" --message "[ $package_name ]: Is Running - Vextrox Shell" "VextroxShell" "Active successful" > /dev/null 2>&1 &
